@@ -5,7 +5,7 @@ package de.mthoma.demowebapp.data;
  * Interface to data layer.
  * @author mthoma
  * @version 1.0
- * @created 27-Mai-2020 06:47:45
+ * @created 27-Mai-2020 08:38:37
  */
 public interface UserDataAccess {
 

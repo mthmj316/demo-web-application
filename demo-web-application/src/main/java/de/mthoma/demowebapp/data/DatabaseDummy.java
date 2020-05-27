@@ -1,24 +1,39 @@
 package de.mthoma.demowebapp.data;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author mthoma
  * @version 1.0
- * @created 27-Mai-2020 06:47:45
+ * @created 27-Mai-2020 08:38:37
  */
 class DatabaseDummy {
-	
+
+	private final List<User> database = new ArrayList();
+	/**
+	 * Is the the last user object which has been found in the database.
+	 */
+	private User lastFoundUser = NULL_USER;
 	/**
 	 * This represents a user object which cannot be found in the data base.
 	 */
 	public static final User NULL_USER = new User();
 
-	private final List<User> database = new ArrayList<>();
+
+
+	public void finalize() throws Throwable {
+
+	}
 
 	DatabaseDummy(){
 		this.init();
+	}
+
+	/**
+	 * Resets the lastFoundUser attribute to the NUL_USER object again.
+	 * @see DatabaseDummy#getLastFoundUser()
+	 */
+	void clearLastFoundUser(){
+
 	}
 
 	/**
@@ -33,25 +48,31 @@ class DatabaseDummy {
 	}
 
 	/**
-	 * Returns the {@link User} for the given alias or {@link User#NULL_USER} if not available.
+	 * Returns the {@link User} for the given alias or {@link User#NULL_USER} if not
+	 * available.  If the search was successful the found user will be written to the
+	 * lastFoundUser attribute.
+	 * @see DatabaseDummy#getLastFoundUser()
+	 * 
 	 * @param alias    Unique identifier of the user.
 	 */
 	User getByAlias(String alias){
-		
-		for(User user : this.database) {
-		
-			if(user.getAlias().equals(alias)) {
-				return user;
-			}
-		}
-		
-		return NULL_USER;
+		return null;
 	}
 
-	/*
+	/**
+	 * Returns the user object which has been searched and found last. If no search
+	 * has been performed or nothing has been found NULL_USER will be returned.
+	 * @return {@link User}
+	 */
+	User getLastFoundUser(){
+		return null;
+	}
+
+	/**
 	 * Creates the dummy data base entries.
 	 */
 	private void init(){
 
 	}
+
 }
