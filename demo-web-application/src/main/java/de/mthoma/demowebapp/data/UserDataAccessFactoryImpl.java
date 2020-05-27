@@ -4,7 +4,7 @@ package de.mthoma.demowebapp.data;
 /**
  * @author mthoma
  * @version 1.0
- * @created 27-Mai-2020 06:47:45
+ * @created 27-Mai-2020 08:38:37
  */
 public class UserDataAccessFactoryImpl implements UserDataAccessFactory {
 
@@ -14,7 +14,16 @@ public class UserDataAccessFactoryImpl implements UserDataAccessFactory {
 	private UserDataAccess userDataAccess;
 
 	public UserDataAccessFactoryImpl(){
-		super();
+
+	}
+
+	/**
+	 * 
+	 * @exception Throwable
+	 */
+	public void finalize()
+	  throws Throwable{
+
 	}
 
 	/**
@@ -27,9 +36,10 @@ public class UserDataAccessFactoryImpl implements UserDataAccessFactory {
 	/**
 	 * Instance of the UserDataAccess interface.
 	 * 
-	 * @param newVal
+	 * @param newVal    newVal
 	 */
 	public void setUserDataAccess(UserDataAccess newVal){
 		userDataAccess = newVal;
 	}
+
 }

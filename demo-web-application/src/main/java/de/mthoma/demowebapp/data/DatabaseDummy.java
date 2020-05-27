@@ -1,15 +1,18 @@
 package de.mthoma.demowebapp.data;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author mthoma
  * @version 1.0
- * @created 27-Mai-2020 06:47:45
+ * @created 27-Mai-2020 08:38:37
  */
 class DatabaseDummy {
-	
+
+	private final List<User> database = new ArrayList();
+	/**
+	 * Is the the last user object which has been found in the database.
+	 */
+	private User lastFoundUser = NULL_USER;
 	/**
 	 * This represents a user object which cannot be found in the data base.
 	 */
@@ -20,10 +23,22 @@ class DatabaseDummy {
 	 */
 	private User lastFoundUser = NULL_USER;
 
-	private final List<User> database = new ArrayList<>();
+
+
+	public void finalize() throws Throwable {
+
+	}
 
 	DatabaseDummy(){
 		this.init();
+	}
+
+	/**
+	 * Resets the lastFoundUser attribute to the NULL_USER object again.
+	 * @see DatabaseDummy#getLastFoundUser()
+	 */
+	void clearLastFoundUser(){
+
 	}
 
 	/**
@@ -45,7 +60,7 @@ class DatabaseDummy {
 	}
 	
 	/**
-	 * Resets the lastFoundUser attribute to the NUL_USER object again.
+	 * Resets the lastFoundUser attribute to the NULL_USER object again.
 	 * 
 	 * @see DatabaseDummy#getLastFoundUser()
 	 */
@@ -85,7 +100,16 @@ class DatabaseDummy {
 		return NULL_USER;
 	}
 
-	/*
+	/**
+	 * Returns the user object which has been searched and found last. If no search
+	 * has been performed or nothing has been found NULL_USER will be returned.
+	 * @return {@link User}
+	 */
+	User getLastFoundUser(){
+		return null;
+	}
+
+	/**
 	 * Creates the dummy data base entries.
 	 */
 	private void init(){
@@ -131,4 +155,5 @@ class DatabaseDummy {
 		
 		this.database.add(user);
 	}
+
 }

@@ -5,7 +5,7 @@ package de.mthoma.demowebapp.data;
  * Represents one user in the Database
  * @author mthoma
  * @version 1.0
- * @created 27-Mai-2020 06:47:45
+ * @created 27-Mai-2020 08:38:37
  */
 public class User {
 
@@ -23,7 +23,16 @@ public class User {
 	private String password;
 
 	public User(){
-		super();
+
+	}
+
+	/**
+	 * 
+	 * @exception Throwable
+	 */
+	public void finalize()
+	  throws Throwable{
+
 	}
 
 	public int getAge(){
@@ -52,7 +61,7 @@ public class User {
 	/**
 	 * Set the age attribute.
 	 * 
-	 * @param newVal
+	 * @param newVal    newVal
 	 */
 	public void setAge(int newVal){
 		age = newVal;
@@ -60,7 +69,7 @@ public class User {
 
 	/**
 	 * 
-	 * @param newVal
+	 * @param newVal    newVal
 	 */
 	public void setAlias(String newVal){
 		alias = newVal;
@@ -68,7 +77,7 @@ public class User {
 
 	/**
 	 * 
-	 * @param newVal
+	 * @param newVal    newVal
 	 */
 	public void setMale(boolean newVal){
 		male = newVal;
@@ -76,7 +85,7 @@ public class User {
 
 	/**
 	 * 
-	 * @param newVal
+	 * @param newVal    newVal
 	 */
 	public void setName(String newVal){
 		name = newVal;
@@ -84,7 +93,7 @@ public class User {
 
 	/**
 	 * 
-	 * @param newVal
+	 * @param newVal    newVal
 	 */
 	public void setPassword(String newVal){
 		password = newVal;
