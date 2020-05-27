@@ -14,11 +14,7 @@ public class UserDataAccessFactoryImpl implements UserDataAccessFactory {
 	private UserDataAccess userDataAccess;
 
 	public UserDataAccessFactoryImpl(){
-
-	}
-
-	public void finalize() throws Throwable {
-
+		super();
 	}
 
 	/**
@@ -36,5 +32,4 @@ public class UserDataAccessFactoryImpl implements UserDataAccessFactory {
 	public void setUserDataAccess(UserDataAccess newVal){
 		userDataAccess = newVal;
 	}
-
 }

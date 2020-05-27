@@ -9,11 +9,7 @@ package de.mthoma.demowebapp.data;
 class UserDataAccessImpl implements UserDataAccess {
 
 	public UserDataAccessImpl(){
-
-	}
-
-	public void finalize() throws Throwable {
-
+		super();
 	}
 
 	/**
@@ -36,5 +32,4 @@ class UserDataAccessImpl implements UserDataAccess {
 	public boolean verifyLogin(String alias, String password){
 		return false;
 	}
-
 }
