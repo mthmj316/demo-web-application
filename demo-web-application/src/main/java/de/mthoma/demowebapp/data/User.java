@@ -23,11 +23,7 @@ public class User {
 	private String password;
 
 	public User(){
-
-	}
-
-	public void finalize() throws Throwable {
-
+		super();
 	}
 
 	public int getAge(){
