@@ -29,7 +29,7 @@ class DatabaseDummy {
 	}
 
 	/**
-	 * Resets the lastFoundUser attribute to the NUL_USER object again.
+	 * Resets the lastFoundUser attribute to the NULL_USER object again.
 	 * @see DatabaseDummy#getLastFoundUser()
 	 */
 	void clearLastFoundUser(){
