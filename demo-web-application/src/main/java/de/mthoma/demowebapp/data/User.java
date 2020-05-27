@@ -5,7 +5,7 @@ package de.mthoma.demowebapp.data;
  * Represents one user in the Database
  * @author mthoma
  * @version 1.0
- * @created 26-Mai-2020 17:04:48
+ * @created 27-Mai-2020 06:47:45
  */
 public class User {
 
