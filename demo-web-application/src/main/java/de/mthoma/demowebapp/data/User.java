@@ -23,16 +23,34 @@ public class User {
 	private String password;
 
 	public User(){
-
+		super();
 	}
-
-	/**
-	 * 
-	 * @exception Throwable
-	 */
-	public void finalize()
-	  throws Throwable{
-
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("User [age=");
+		builder.append(age);
+		builder.append(", ");
+		if (alias != null) {
+			builder.append("alias=");
+			builder.append(alias);
+			builder.append(", ");
+		}
+		builder.append("male=");
+		builder.append(male);
+		builder.append(", ");
+		if (name != null) {
+			builder.append("name=");
+			builder.append(name);
+			builder.append(", ");
+		}
+		if (password != null) {
+			builder.append("password=");
+			builder.append(password);
+		}
+		builder.append("]");
+		return builder.toString();
 	}
 
 	public int getAge(){

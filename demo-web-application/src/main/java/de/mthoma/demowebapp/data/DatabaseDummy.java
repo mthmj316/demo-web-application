@@ -1,5 +1,7 @@
 package de.mthoma.demowebapp.data;
 
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author mthoma
@@ -8,37 +10,16 @@ package de.mthoma.demowebapp.data;
  */
 class DatabaseDummy {
 
-	private final List<User> database = new ArrayList();
-	/**
-	 * Is the the last user object which has been found in the database.
-	 */
-	private User lastFoundUser = NULL_USER;
+	private final List<User> database = new ArrayList<>();
+	
 	/**
 	 * This represents a user object which cannot be found in the data base.
 	 */
 	public static final User NULL_USER = new User();
-	
-	/*
-	 * Is the the last user object which has been found in the database.
-	 */
-	private User lastFoundUser = NULL_USER;
 
-
-
-	public void finalize() throws Throwable {
-
-	}
 
 	DatabaseDummy(){
 		this.init();
-	}
-
-	/**
-	 * Resets the lastFoundUser attribute to the NULL_USER object again.
-	 * @see DatabaseDummy#getLastFoundUser()
-	 */
-	void clearLastFoundUser(){
-
 	}
 
 	/**
@@ -58,24 +39,6 @@ class DatabaseDummy {
 				
 		return (foundUser != NULL_USER && foundUser.getPassword().equals(password));
 	}
-	
-	/**
-	 * Resets the lastFoundUser attribute to the NULL_USER object again.
-	 * 
-	 * @see DatabaseDummy#getLastFoundUser()
-	 */
-	void clearLastFoundUser() {
-		this.lastFoundUser = NULL_USER;
-	}
-	
-	/**
-	 * Returns the user object which has been searched and found last.
-	 * If no search has been performed or nothing has been found NULL_USER will be returned.
-	 * @return {@link User}
-	 */
-	User getLastFoundUser() {
-		return this.lastFoundUser;
-	}
 
 	/**
 	 * Returns the {@link User} for the given alias or {@link User#NULL_USER} if not available.
@@ -91,22 +54,11 @@ class DatabaseDummy {
 		
 			if(user.getAlias().equals(alias)) {
 				
-				this.lastFoundUser = user;
-				
 				return user;
 			}
 		}
 		
 		return NULL_USER;
-	}
-
-	/**
-	 * Returns the user object which has been searched and found last. If no search
-	 * has been performed or nothing has been found NULL_USER will be returned.
-	 * @return {@link User}
-	 */
-	User getLastFoundUser(){
-		return null;
 	}
 
 	/**
@@ -123,6 +75,7 @@ class DatabaseDummy {
 		
 		this.database.add(user);
 		
+		user = new User();
 		user.setAge(31);
 		user.setAlias("mila");
 		user.setMale(false);
@@ -131,6 +84,7 @@ class DatabaseDummy {
 		
 		this.database.add(user);
 		
+		user = new User();
 		user.setAge(47);
 		user.setAlias("McCabe");
 		user.setMale(true);
@@ -139,6 +93,7 @@ class DatabaseDummy {
 		
 		this.database.add(user);
 		
+		user = new User();
 		user.setAge(19);
 		user.setAlias("coloso");
 		user.setMale(true);
@@ -147,6 +102,7 @@ class DatabaseDummy {
 		
 		this.database.add(user);
 		
+		user = new User();
 		user.setAge(22);
 		user.setAlias("gabö");
 		user.setMale(false);

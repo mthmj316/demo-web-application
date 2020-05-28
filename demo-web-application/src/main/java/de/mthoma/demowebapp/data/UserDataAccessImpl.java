@@ -1,24 +1,16 @@
 package de.mthoma.demowebapp.data;
 
-
 /**
  * @author mthoma
  * @version 1.0
  * @created 27-Mai-2020 08:38:37
  */
-class UserDataAccessImpl implements UserDataAccess {
+public class UserDataAccessImpl implements UserDataAccess {
+	
+	private DatabaseDummy databaseDummy = new DatabaseDummy();
 
 	public UserDataAccessImpl(){
-
-	}
-
-	/**
-	 * 
-	 * @exception Throwable
-	 */
-	public void finalize()
-	  throws Throwable{
-
+		super();
 	}
 
 	/**
@@ -28,7 +20,7 @@ class UserDataAccessImpl implements UserDataAccess {
 	 * @param alias    The unquie name of the user which shall be returned.
 	 */
 	public User getUser(String alias){
-		return null;
+		return this.databaseDummy.getByAlias(alias);
 	}
 
 	/**
@@ -39,7 +31,7 @@ class UserDataAccessImpl implements UserDataAccess {
 	 * @param password    The password of the user.
 	 */
 	public boolean verifyLogin(String alias, String password){
-		return false;
+		return this.databaseDummy.existsAliasPasswordCombination(alias, password);
 	}
 
 }

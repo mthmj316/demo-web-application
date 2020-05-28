@@ -1,5 +1,6 @@
 package de.mthoma.demowebapp.data;
 
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author mthoma
@@ -11,19 +12,11 @@ public class UserDataAccessFactoryImpl implements UserDataAccessFactory {
 	/**
 	 * Instance of the UserDataAccess interface.
 	 */
+	@Autowired
 	private UserDataAccess userDataAccess;
 
 	public UserDataAccessFactoryImpl(){
-
-	}
-
-	/**
-	 * 
-	 * @exception Throwable
-	 */
-	public void finalize()
-	  throws Throwable{
-
+		super();
 	}
 
 	/**
@@ -41,5 +34,4 @@ public class UserDataAccessFactoryImpl implements UserDataAccessFactory {
 	public void setUserDataAccess(UserDataAccess newVal){
 		userDataAccess = newVal;
 	}
-
 }
