@@ -1,14 +1,20 @@
 package de.mthoma.demowebapp;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoWebApplicationTests {
+public class DemoWebApplicationTests {
+	
+	public static final String HTTP_LOCALHOST_8082_DEMOWEBAPP_LOGIN = "http://localhost:8082/demowebapp/login";
 	
 	@Autowired
 	LoginController loginController;
@@ -35,4 +41,20 @@ class DemoWebApplicationTests {
 		assertThat(this.homeController).isNotNull();
 	}
 
+	/**
+	 * Test if the url of the demo web applikcation is available.
+	 * @throws Exception
+	 */
+	@Test
+	public void testLoginPageUrl() throws Exception {
+		
+		URL u = new URL (HTTP_LOCALHOST_8082_DEMOWEBAPP_LOGIN);
+		HttpURLConnection.setFollowRedirects(false);
+		HttpURLConnection huc =  ( HttpURLConnection )  u.openConnection (); 
+		huc.setRequestMethod ("HEAD");
+		
+		int actual = huc.getResponseCode() ;
+		
+		assertEquals(HttpURLConnection.HTTP_OK, actual);
+	}
 }
