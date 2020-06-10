@@ -111,5 +111,4 @@ class DatabaseDummy {
 		
 		this.database.add(user);
 	}
-
 }

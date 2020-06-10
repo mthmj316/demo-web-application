@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import de.mthoma.demowebapp.controller.HomeController;
+import de.mthoma.demowebapp.controller.LoginController;
+
 @SpringBootTest
 public class DemoWebApplicationTests {
 	

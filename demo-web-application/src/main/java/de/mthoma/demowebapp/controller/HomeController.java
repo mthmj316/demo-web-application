@@ -1,4 +1,4 @@
-package de.mthoma.demowebapp;
+package de.mthoma.demowebapp.controller;
 
 import org.springframework.stereotype.Controller;
 
