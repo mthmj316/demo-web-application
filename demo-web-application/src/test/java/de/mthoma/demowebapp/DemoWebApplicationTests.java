@@ -17,7 +17,7 @@ import de.mthoma.demowebapp.controller.LoginController;
 @SpringBootTest
 public class DemoWebApplicationTests {
 	
-	public static final String HTTP_LOCALHOST_8082_DEMOWEBAPP_LOGIN = "http://localhost:8082/demowebapp/login";
+	public static final String TEST_HTTP_LOCALHOST_8080_LOGIN = "http://localhost:8080/login";
 	
 	@Autowired
 	LoginController loginController;
@@ -51,7 +51,7 @@ public class DemoWebApplicationTests {
 	@Test
 	public void testLoginPageUrl() throws Exception {
 		
-		URL u = new URL (HTTP_LOCALHOST_8082_DEMOWEBAPP_LOGIN);
+		URL u = new URL (TEST_HTTP_LOCALHOST_8080_LOGIN);
 		HttpURLConnection.setFollowRedirects(false);
 		HttpURLConnection huc =  ( HttpURLConnection )  u.openConnection (); 
 		huc.setRequestMethod ("HEAD");

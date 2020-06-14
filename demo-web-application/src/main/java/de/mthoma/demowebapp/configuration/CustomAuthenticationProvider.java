@@ -41,7 +41,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		
 		if(this.userDataAccess.verifyLogin(alias, password)) {
 			
-			final List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
+			final List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 			grantedAuthorities.add(new SimpleGrantedAuthority("USER_ROLE"));
 			
 			final UserDetails userDetails = new User(alias, password, grantedAuthorities);
