@@ -2,6 +2,9 @@ package de.mthoma.demowebapp.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -279,5 +282,69 @@ public class LoginPageUITest {
 		String expected = "html";
 
 		assertEquals(expected, actual);
+	}
+	
+	/**
+	 * Test if the tag with id==main_container has the tag name div.
+	 */
+	@Test
+	public void testMainConatinerTagName() {
+
+		WebElement tag = DRIVER.findElement(By.id("main_container"));
+
+		String actual = tag.getTagName();
+
+		assertEquals("div", actual);
+	}
+
+	/**
+	 * Test if the parent of the tag with id==main_container is the tag with id==body. 
+	 */
+	@Test
+	public void testMainConatinerParent() {
+
+		WebElement tag = DRIVER.findElement(By.id("main_container"));
+
+		WebElement parentTag = tag.findElement(By.xpath("./.."));
+
+		String actual = parentTag.getAttribute("id");
+		String expected = "body";
+
+		assertEquals(expected, actual);
+	}
+	
+	/**
+	 * Test if the class attribute of tag with id==main_container is set to class==cls_main_container.
+	 */
+	@Test
+	public void testMainContainerAttrClass() {
+
+		WebElement tag = DRIVER.findElement(By.id("main_container"));
+
+		String expected = "cls_main_container";
+		String actual = tag.getAttribute("class");
+
+		assertEquals(expected, actual, "'" + expected + "'" + " != " + "'" + actual + "'");
+	}
+	
+	/**
+	 * Test of the style of the tag with the id==main_container.
+	 */
+	@Test
+	public void testMainContainerStyle() {
+		
+		final Map<String, String> expectedStyle = new HashMap<String, String>();
+		expectedStyle.put("display", "table");
+		expectedStyle.put("position", "absolute");
+		expectedStyle.put("top", "0");
+		expectedStyle.put("left", "0");
+		expectedStyle.put("height", "100%");
+		expectedStyle.put("width", "100%");
+		
+		WebElement tag = DRIVER.findElement(By.id("main_container"));
+		
+		String testResult = SeleniumCore.checkStyle(DRIVER, tag, expectedStyle);
+		
+		assertEquals("", testResult, testResult);
 	}
 }

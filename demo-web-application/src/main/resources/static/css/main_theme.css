@@ -1,0 +1,9 @@
+@charset "UTF-8";
+.cls_main_container{
+	display: table;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;	
+}
