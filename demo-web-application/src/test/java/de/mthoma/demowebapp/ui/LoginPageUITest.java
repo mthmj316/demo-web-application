@@ -1,6 +1,7 @@
 package de.mthoma.demowebapp.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +23,7 @@ import de.mthoma.demowebapp.utils.SeleniumCore;
 @SpringBootTest
 public class LoginPageUITest {
 	
+	private static final String BOLD = "700";
 	private static WebDriver DRIVER = SeleniumCore.getDriver(); 
 	
 	@BeforeAll
@@ -488,5 +491,195 @@ public class LoginPageUITest {
 		final String testResult = SeleniumCore.checkStyle(DRIVER, tag, expectedStyle);
 
 		assertEquals("", testResult, testResult);
+	}
+	
+	/**
+	 * Test if the header with id==login_header has the tag name h2.
+	 */
+	@Test
+	public void testLoginHeaderTagName() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_header"));
+
+		final String actual = tag.getTagName();
+
+		assertEquals("h2", actual);
+	}
+
+	/**
+	 * Test if the parent of the header with id==login_header is the tag with id==main_container_vertical. 
+	 */
+	@Test
+	public void testLoginHeaderParent() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_header"));
+
+		final WebElement parentTag = tag.findElement(By.xpath("./.."));
+
+		final String actual = parentTag.getAttribute("id");
+		final String expected = "main_container_vertical";
+
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test if the text of the header with id==login_header text is: Login:. 
+	 */
+	@Test
+	public void testLoginHeaderText() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_header"));
+
+		final String actual = tag.getText();
+		final String expected = "Login:";
+
+		assertEquals(expected, actual);
+	}
+	
+	/**
+	 * Test if the class attribute of tag with id==login_header is set to class==cls_main_header.
+	 */
+	@Test
+	public void testLoginHeaderAttrClass() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_header"));
+
+		final String expected = "cls_main_header";
+		final String actual = tag.getAttribute("class");
+
+		assertEquals(expected, actual, "'" + expected + "'" + " != " + "'" + actual + "'");
+	}
+	
+	/**
+	 * Test of the style of the tag with the id==login_header.
+	 */
+	@Test
+	public void testLoginHeaderStyle() {
+
+		final Map<String, String> expectedStyle = new HashMap<String, String>();
+		expectedStyle.put("font-weight", BOLD); //BOLD == 700
+
+		final WebElement tag = DRIVER.findElement(By.id("login_header"));
+
+		final String testResult = SeleniumCore.checkStyle(DRIVER, tag, expectedStyle);
+
+		assertEquals("", testResult, testResult);
+	}
+	
+	/**
+	 * Test of immediate preceding sibling of the tag with id==login_header.
+	 * An {@link NoSuchElementException} is expected, since there is no preceding sibling.
+	 */
+	@Test
+	public void testLoginHeaderPrecedingSibling() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_header"));
+
+		assertThrows(NoSuchElementException.class, () -> tag.findElement(By.xpath("preceding-sibling::*[1]")));
+	}
+	
+	/**
+	 * Test of immediate following sibling of the tag with id==login_header.
+	 */
+	@Test
+	public void testLoginHeaderFollowingSibling() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_header"));
+
+		final WebElement followingSibling = tag.findElement(By.xpath("following-sibling::*[1]"));
+
+		final String expectedId = "login_form";
+		final String actualId = followingSibling.getAttribute("id");
+
+		assertEquals(expectedId, actualId, "wrong following sibling");
+	}
+	
+	/**
+	 * Test if the tag with id==login_form has the tag name form.
+	 */
+	@Test
+	public void testLoginFormTagName() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_form"));
+
+		final String actual = tag.getTagName();
+
+		assertEquals("form", actual);
+	}
+
+	/**
+	 * Test if the parent of the tag with id==login_form is the tag with id==main_container_vertical. 
+	 */
+	@Test
+	public void testLoginFormParent() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_form"));
+
+		final WebElement parentTag = tag.findElement(By.xpath("./.."));
+
+		final String actual = parentTag.getAttribute("id");
+		final String expected = "main_container_vertical";
+
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test the submission method of the form with the id: login_form
+	 */
+	@Test
+	void testLoginFormMethod() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_form"));
+
+		final String expectedMethod = "get";
+		final String actualMethod = tag.getAttribute("method");
+
+		assertEquals(expectedMethod, actualMethod, "wrong submission method");
+	}
+
+	/**
+	 * Test the action of the form with the id: login_form
+	 */
+	@Test
+	void testLoginFormAction() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_form"));
+
+		final String expectedAction = "http://localhost:8080/login";
+		final String actualAction = tag.getAttribute("action");
+
+		assertEquals(expectedAction, actualAction, "wrong action");
+	}
+	
+	/**
+	 * Test of immediate preceding sibling of the tag with id==login_form.
+	 */
+	@Test
+	public void testLoginFormPrecedingSibling() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_form"));
+
+		final WebElement followingSibling = tag.findElement(By.xpath("preceding-sibling::*[1]"));
+
+		final String expectedId = "login_header";
+		final String actualId = followingSibling.getAttribute("id");
+
+		assertEquals(expectedId, actualId, "wrong preceding sibling");
+	}
+	
+	/**
+	 * Test of immediate following sibling of the tag with id==login_form.
+	 */
+	@Test
+	public void testLoginFormFollowingSibling() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_form"));
+
+		final WebElement followingSibling = tag.findElement(By.xpath("following-sibling::*[1]"));
+
+		final String expectedId = "login_page_script";
+		final String actualId = followingSibling.getAttribute("id");
+
+		assertEquals(expectedId, actualId, "wrong following sibling");
 	}
 }

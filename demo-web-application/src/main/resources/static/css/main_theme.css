@@ -23,4 +23,8 @@
 	border-color: #3D6DA9;
 	height: 250px;
 	padding: 20px;
-}	
+}
+
+.cls_main_header{
+	font-weight: bold;
+}
