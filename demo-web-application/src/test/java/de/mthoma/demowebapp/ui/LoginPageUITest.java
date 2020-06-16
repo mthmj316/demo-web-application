@@ -342,8 +342,8 @@ public class LoginPageUITest {
 		expectedStyle.put("position", "absolute");
 		expectedStyle.put("top", "0px");
 		expectedStyle.put("left", "0px");		
-		expectedStyle.put("height", SeleniumCore.getWindowHeight(DRIVER) + "px");
-		expectedStyle.put("width", SeleniumCore.getWindowWidth(DRIVER) + "px");
+		expectedStyle.put("height", SeleniumCore.getWindowHeight(DRIVER) + "px"); //Test 100% height
+		expectedStyle.put("width", SeleniumCore.getWindowWidth(DRIVER) + "px"); // Test 100% width
 		
 		WebElement tag = DRIVER.findElement(By.id("main_container"));
 		
@@ -413,4 +413,80 @@ public class LoginPageUITest {
 		assertEquals("", testResult, testResult);
 	}
 	
+	/**
+	 * Test if the tag with id==main_container_vertical has the tag name div.
+	 */
+	@Test
+	public void testMainContainerVerticalTagName() {
+
+		WebElement tag = DRIVER.findElement(By.id("main_container_vertical"));
+
+		String actual = tag.getTagName();
+
+		assertEquals("div", actual);
+	}
+
+	/**
+	 * Test if the parent of the tag with id==main_container_vertical is the tag with id==main_container_horizontal. 
+	 */
+	@Test
+	public void testMainContainerVerticalParent() {
+
+		WebElement tag = DRIVER.findElement(By.id("main_container_vertical"));
+
+		WebElement parentTag = tag.findElement(By.xpath("./.."));
+
+		String actual = parentTag.getAttribute("id");
+		String expected = "main_container_horizontal";
+
+		assertEquals(expected, actual);
+	}
+	
+	/**
+	 * Test if the class attribute of tag with id==main_container_vertical is set to class==cls_main_container_vertical.
+	 */
+	@Test
+	public void testMainContainerVerticalAttrClass() {
+
+		WebElement tag = DRIVER.findElement(By.id("main_container_vertical"));
+
+		String expected = "cls_main_container_vertical";
+		String actual = tag.getAttribute("class");
+
+		assertEquals(expected, actual, "'" + expected + "'" + " != " + "'" + actual + "'");
+	}
+	
+	/**
+	 * Test of the style of the tag with the id==main_container_vertical.
+	 */
+	@Test
+	public void testMainContainerVerticalStyle() {
+
+		final Map<String, String> expectedStyle = new HashMap<String, String>();
+		expectedStyle.put("background-color","rgb(224, 255, 255)");
+		expectedStyle.put("width", "400px");
+		expectedStyle.put("border-top-width","1px");
+		expectedStyle.put("border-bottom-width","1px");
+		expectedStyle.put("border-left-width","1px");
+		expectedStyle.put("border-right-width","1px");
+		expectedStyle.put("border-top-style","solid");
+		expectedStyle.put("border-bottom-style","solid");
+		expectedStyle.put("border-left-style","solid");
+		expectedStyle.put("border-right-style","solid");
+		expectedStyle.put("border-top-color","rgb(61, 109, 169)");
+		expectedStyle.put("border-bottom-color","rgb(61, 109, 169)");
+		expectedStyle.put("border-left-color","rgb(61, 109, 169)");
+		expectedStyle.put("border-right-color","rgb(61, 109, 169)");
+		expectedStyle.put("height","250px");
+		expectedStyle.put("padding-top","20px");
+		expectedStyle.put("padding-bottom","20px");
+		expectedStyle.put("padding-left","20px");
+		expectedStyle.put("padding-right","20px");
+
+		final WebElement tag = DRIVER.findElement(By.id("main_container_vertical"));
+
+		final String testResult = SeleniumCore.checkStyle(DRIVER, tag, expectedStyle);
+
+		assertEquals("", testResult, testResult);
+	}
 }
