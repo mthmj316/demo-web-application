@@ -193,7 +193,7 @@ public class LoginPageUITest {
 
 		WebElement tag = DRIVER.findElement(By.id("link_main_theme"));
 
-		String expected = "/css/main_theme.css";
+		String expected = "http://localhost:8080/css/main_theme.css";
 		String actual = tag.getAttribute("href");
 
 		assertEquals(expected, actual);
@@ -249,7 +249,11 @@ public class LoginPageUITest {
 
 		WebElement tag = DRIVER.findElement(By.id("link_login_page_theme"));
 
-		String expected = "/css/login_page_theme.css";
+		String url = DRIVER.getCurrentUrl();
+		
+		System.out.println("Test:" + url);
+		
+		String expected = "http://localhost:8080/css/login_page_theme.css";
 		String actual = tag.getAttribute("href");
 
 		assertEquals(expected, actual);
@@ -336,10 +340,10 @@ public class LoginPageUITest {
 		final Map<String, String> expectedStyle = new HashMap<String, String>();
 		expectedStyle.put("display", "table");
 		expectedStyle.put("position", "absolute");
-		expectedStyle.put("top", "0");
-		expectedStyle.put("left", "0");
-		expectedStyle.put("height", "100%");
-		expectedStyle.put("width", "100%");
+		expectedStyle.put("top", "0px");
+		expectedStyle.put("left", "0px");		
+		expectedStyle.put("height", SeleniumCore.getWindowHeight(DRIVER) + "px");
+		expectedStyle.put("width", SeleniumCore.getWindowWidth(DRIVER) + "px");
 		
 		WebElement tag = DRIVER.findElement(By.id("main_container"));
 		
@@ -398,7 +402,7 @@ public class LoginPageUITest {
 	public void testMainContainerHorizontalStyle() {
 
 		final Map<String, String> expectedStyle = new HashMap<String, String>();
-		expectedStyle.put("background", "#F1F1F1");
+		expectedStyle.put("background-color", "rgb(241, 241, 241)");
 		expectedStyle.put("display", "table-cell");
 		expectedStyle.put("vertical-align", "middle");
 

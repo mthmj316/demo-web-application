@@ -60,12 +60,9 @@ public final class SeleniumCore {
 		
 		final StringBuffer errorReport = new StringBuffer();
 		
-		final JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
-		
 		expectedStyle.forEach((property, expected) -> {
 			
-			String actual = (String) javascriptExecutor.executeScript(
-					"return window.getComputedStyle(arguments[0]).getPropertyValue('" + property + "');", element2Test);
+			String actual = element2Test.getCssValue(property);
 			
 			if(!expected.equals(actual)) {
 				
@@ -79,5 +76,35 @@ public final class SeleniumCore {
 		});
 		
 		return errorReport.toString();
+	}
+	
+	/**
+	 * Returns the window width.
+	 * @param driver {@link WebDriver}
+	 * @return int
+	 */
+	public static long getWindowWidth(final WebDriver driver) {
+		
+		final JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
+		
+		long width = (long) javascriptExecutor.executeScript(
+				"return window.innerWidth;");
+		
+		return width;
+	}
+	
+	/**
+	 * Returns the window height.
+	 * @param driver {@link WebDriver}
+	 * @return int
+	 */
+	public static long getWindowHeight(final WebDriver driver) {
+		
+		final JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
+		
+		long height = (long) javascriptExecutor.executeScript(
+				"return window.innerHeight;");
+		
+		return height;
 	}
 }
