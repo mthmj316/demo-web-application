@@ -347,4 +347,66 @@ public class LoginPageUITest {
 		
 		assertEquals("", testResult, testResult);
 	}
+	
+	/**
+	 * Test if the tag with id==main_container_horizontal has the tag name div.
+	 */
+	@Test
+	public void testMainContainerHorizontalTagName() {
+
+		WebElement tag = DRIVER.findElement(By.id("main_container_horizontal"));
+
+		String actual = tag.getTagName();
+
+		assertEquals("div", actual);
+	}
+
+	/**
+	 * Test if the parent of the tag with id==main_container_horizontal is the tag with id==main_container. 
+	 */
+	@Test
+	public void testMainContainerHorizontalParent() {
+
+		WebElement tag = DRIVER.findElement(By.id("main_container_horizontal"));
+
+		WebElement parentTag = tag.findElement(By.xpath("./.."));
+
+		String actual = parentTag.getAttribute("id");
+		String expected = "main_container";
+
+		assertEquals(expected, actual);
+	}
+	
+	/**
+	 * Test if the class attribute of tag with id==main_container_horizontal is set to class==cls_main_container_horizontal.
+	 */
+	@Test
+	public void testMainContainerHorizontalAttrClass() {
+
+		WebElement tag = DRIVER.findElement(By.id("main_container_horizontal"));
+
+		String expected = "cls_main_container_horizontal";
+		String actual = tag.getAttribute("class");
+
+		assertEquals(expected, actual, "'" + expected + "'" + " != " + "'" + actual + "'");
+	}
+	
+	/**
+	 * Test of the style of the tag with the id==main_container_horizontal.
+	 */
+	@Test
+	public void testMainContainerHorizontalStyle() {
+
+		final Map<String, String> expectedStyle = new HashMap<String, String>();
+		expectedStyle.put("background", "#F1F1F1");
+		expectedStyle.put("display", "table-cell");
+		expectedStyle.put("vertical-align", "middle");
+
+		final WebElement tag = DRIVER.findElement(By.id("main_container_horizontal"));
+
+		final String testResult = SeleniumCore.checkStyle(DRIVER, tag, expectedStyle);
+
+		assertEquals("", testResult, testResult);
+	}
+	
 }

@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html id="html" lang="en">
+<html id="html" lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head id="head">
 		<title id="title">Login Page</title>
-		<link id="link_main_theme" rel=stylesheet href=/css/main_theme.css/>
+		<link id="link_main_theme" type="text/css" rel="stylesheet" th:href="@{/css/main_theme.css}" />
+		<link id="link_login_page_theme" type="text/css" rel="stylesheet" th:href="@{/css/login_page_theme.css}" />
 	</head>
 	<body id="body">
 		<div id="main_container" class="cls_main_container">
+			<div id="main_container_horizontal" class="cls_main_container_horizontal">
+			</div>
 		</div>
 	</body>
 </html>

@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.cls_input_field {
+	background: #FFFFF0;
+}
+
+.cls_text_light_color {
+	color: #747474
+}
+		
+.cls_error_text{
+	color: red
+}
+		
+.cls_invisible {
+	visibility: hidden
+}
+		
+.cls_visible {
+	visibility: visible
+}	

@@ -49,7 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 //		.antMatchers("").hasRole("")
 //		.antMatchers("").anonymous()
-		.antMatchers("/login*").permitAll()
+		.antMatchers("/login*", "/*.css").permitAll()
 		.anyRequest().authenticated()
 		.and()
 		.formLogin()
