@@ -11,6 +11,9 @@
 				<div id="main_container_vertical" class="cls_main_container_vertical">
 					<h2 id="login_header" class="cls_main_header">Login:</h2>
 					<form id="login_form" action="login" method="get">
+						<input id="login_name" class="cls_input_field" type="text" placeholder="Username" required/>
+						<input id="login_password" class="cls_input_field" type="password" placeholder="Password" required/>
+						<p id="login_error_message" class="cls_error_text" th:classappend="${login_error_message_cls}">Wrong credentials!</p>
 					</form>
 				</div>
 			</div>

@@ -2,11 +2,9 @@
 
 .cls_input_field {
 	background-color: #FFFFF0;
-}
-
-.cls_text_light_color {
-	color: #747474
-}
+	width: 100%;
+	height: 30px;
+}		
 		
 .cls_error_text{
 	color: red
