@@ -54,11 +54,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.and()
 		.formLogin()
 		.loginPage("/login")
+		.usernameParameter("login_name")
+		.passwordParameter("login_password")
 		.loginProcessingUrl("/perform_login")
 		.defaultSuccessUrl("/home", true)
 		.failureUrl("/login?error=true")
 		.and()
-		.logout()
+		.logout().permitAll()
 		.logoutUrl("logout_page.html")
 		.deleteCookies("JSESSIONID");
 	}
