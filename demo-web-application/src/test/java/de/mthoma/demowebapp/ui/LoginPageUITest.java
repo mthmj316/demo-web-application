@@ -631,7 +631,7 @@ public class LoginPageUITest {
 
 		final WebElement tag = DRIVER.findElement(By.id("login_form"));
 
-		final String expectedMethod = "get";
+		final String expectedMethod = "post";
 		final String actualMethod = tag.getAttribute("method");
 
 		assertEquals(expectedMethod, actualMethod, "wrong submission method");
@@ -645,7 +645,7 @@ public class LoginPageUITest {
 
 		final WebElement tag = DRIVER.findElement(By.id("login_form"));
 
-		final String expectedAction = "http://localhost:8080/login";
+		final String expectedAction = "http://localhost:8080/perform_login";
 		final String actualAction = tag.getAttribute("action");
 
 		assertEquals(expectedAction, actualAction, "wrong action");
@@ -669,17 +669,13 @@ public class LoginPageUITest {
 	
 	/**
 	 * Test of immediate following sibling of the tag with id==login_form.
+	 * An {@link NoSuchElementException} is expected, since there is no follwoing sibling.
 	 */
 	@Test
 	public void testLoginFormFollowingSibling() {
 
 		final WebElement tag = DRIVER.findElement(By.id("login_form"));
 
-		final WebElement followingSibling = tag.findElement(By.xpath("following-sibling::*[1]"));
-
-		final String expectedId = "login_page_script";
-		final String actualId = followingSibling.getAttribute("id");
-
-		assertEquals(expectedId, actualId, "wrong following sibling");
+		assertThrows(NoSuchElementException.class, () -> tag.findElement(By.xpath("following-sibling::*[1]")));
 	}
 }
