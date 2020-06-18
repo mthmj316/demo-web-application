@@ -1,6 +1,8 @@
 package de.mthoma.demowebapp.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashMap;
@@ -678,4 +680,310 @@ public class LoginPageUITest {
 
 		assertThrows(NoSuchElementException.class, () -> tag.findElement(By.xpath("following-sibling::*[1]")));
 	}
+	
+	/**
+	 * Test if the tag with id==login_name has the tag name input.
+	 */
+	@Test
+	public void testLoginNameTagName() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_name"));
+
+		final String actual = tag.getTagName();
+
+		assertEquals("input", actual, "wrong tag name");
+	}
+
+	/**
+	 * Test if the parent of the tag with id==login_name is the tag with id==login_form. 
+	 */
+	@Test
+	public void testLoginNameParent() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_name"));
+
+		final WebElement parentTag = tag.findElement(By.xpath("./.."));
+
+		final String actual = parentTag.getAttribute("id");
+		final String expected = "login_form";
+
+		assertEquals(expected, actual, "wrong parent");
+	}
+
+	/**
+	 * Tests if the value of the html input field with the id: login_name is correct.
+	 */
+	@Test
+	void testLoginNameValue() {
+
+		assertEquals("", DRIVER.findElement(By.id("login_name")).getAttribute("value"));
+	}
+
+	/**
+	 * Tests if the type of the html input field with the id: login_name is correct.
+	 */
+	@Test
+	void testLoginNameType() throws Exception {
+
+		assertEquals("text", DRIVER.findElement(By.id("login_name")).getAttribute("type"));
+
+	}
+
+	/**
+	 * Tests if the placeholder of the html input field with the id: login_name is correct.
+	 */
+	@Test
+	void testLoginNamePlaceholder() throws Exception {
+
+		assertEquals("Username", DRIVER.findElement(By.id("login_name")).getAttribute("placeholder"));
+	}
+
+	/**
+	 * Tests if the required attribute of the html input field with the id: login_name is set.
+	 */
+	@Test
+	void testLoginNameRequired() throws Exception {
+
+		assertNotNull(DRIVER.findElement(By.id("login_name")).getAttribute("required"));
+	}
+	
+	/**
+	 * Test of immediate preceding sibling of the tag with id==login_name.
+	 * An {@link NoSuchElementException} is expected, since there is no following sibling.
+	 */
+	@Test
+	public void testLoginNamePrecedingSibling() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_name"));
+
+		assertThrows(NoSuchElementException.class, () -> tag.findElement(By.xpath("preceding-sibling::*[1]")));
+	}
+	
+	/**
+	 * Test of immediate following sibling of the tag with id==login_name.
+	 */
+	@Test
+	public void testLoginNameFollowingSibling() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_name"));
+
+		final WebElement followingSibling = tag.findElement(By.xpath("following-sibling::*[1]"));
+
+		final String expectedId = "login_password";
+		final String actualId = followingSibling.getAttribute("id");
+
+		assertEquals(expectedId, actualId, "wrong following sibling");
+	}
+	
+	/**
+	 * Test if the tag with id==login_password has the tag name input.
+	 */
+	@Test
+	public void testLoginPasswordTagName() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_password"));
+
+		final String actual = tag.getTagName();
+
+		assertEquals("input", actual, "wrong tag name");
+	}
+
+	/**
+	 * Test if the parent of the tag with id==login_password is the tag with id==login_form. 
+	 */
+	@Test
+	public void testLoginPasswordParent() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_password"));
+
+		final WebElement parentTag = tag.findElement(By.xpath("./.."));
+
+		final String actual = parentTag.getAttribute("id");
+		final String expected = "login_form";
+
+		assertEquals(expected, actual, "wrong parent");
+	}
+
+	/**
+	 * Tests if the value of the html input field with the id: login_password is correct.
+	 */
+	@Test
+	void testLoginPasswordValue() {
+
+		assertEquals("", DRIVER.findElement(By.id("login_password")).getAttribute("value"));
+	}
+
+	/**
+	 * Tests if the type of the html input field with the id: login_password is correct.
+	 */
+	@Test
+	void testLoginPasswordType() throws Exception {
+
+		assertEquals("password", DRIVER.findElement(By.id("login_password")).getAttribute("type"));
+
+	}
+
+	/**
+	 * Tests if the placeholder of the html input field with the id: login_password is correct.
+	 */
+	@Test
+	void testLoginPasswordPlaceholder() throws Exception {
+
+		assertEquals("Password", DRIVER.findElement(By.id("login_password")).getAttribute("placeholder"));
+	}
+
+	/**
+	 * Tests if the required attribute of the html input field with the id: login_password is set.
+	 */
+	@Test
+	void testLoginPasswordRequired() throws Exception {
+
+		assertNotNull(DRIVER.findElement(By.id("login_password")).getAttribute("required"));
+	}
+	
+	/**
+	 * Test of immediate preceding sibling of the tag with id==login_password.
+	 */
+	@Test
+	public void testLoginPasswordPrecedingSibling() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_password"));
+
+		final WebElement followingSibling = tag.findElement(By.xpath("preceding-sibling::*[1]"));
+
+		final String expectedId = "login_name";
+		final String actualId = followingSibling.getAttribute("id");
+
+		assertEquals(expectedId, actualId, "wrong preceding sibling");
+	}
+
+	/**
+	 * Test of immediate following sibling of the tag with id==login_password.
+	 */
+	@Test
+	public void testLoginPasswordFollowingSibling() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_password"));
+
+		final WebElement followingSibling = tag.findElement(By.xpath("following-sibling::*[1]"));
+
+		final String expectedId = "login_error_message";
+		final String actualId = followingSibling.getAttribute("id");
+
+		assertEquals(expectedId, actualId, "wrong following sibling");
+	}
+	
+	/**
+	 * Test if the class attribute of tag with id==login_name is set to class==cls_input_field.
+	 */
+	@Test
+	public void testLoginNameAttrClass() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_name"));
+
+		final String expected = "cls_input_field";
+		final String actual = tag.getAttribute("class");
+
+		assertEquals(expected, actual, "'" + expected + "'" + " != " + "'" + actual + "'");
+	}
+	
+	/**
+	 * Test if the class attribute of tag with id==login_password is set to class==cls_input_field.
+	 */
+	@Test
+	public void testLoginPasswordAttrClass() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_password"));
+
+		final String expected = "cls_input_field";
+		final String actual = tag.getAttribute("class");
+
+		assertEquals(expected, actual, "'" + expected + "'" + " != " + "'" + actual + "'");
+	}
+	
+	/**
+	 * Test if the tag with id==login_button has the tag name input.
+	 */
+	@Test
+	public void testLoginButtonTagName() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_button"));
+
+		final String actual = tag.getTagName();
+
+		assertEquals("input", actual, "wrong tag name");
+	}
+
+	/**
+	 * Test if the parent of the tag with id==login_button is the tag with id==login_form. 
+	 */
+	@Test
+	public void testLoginButtonParent() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_button"));
+
+		final WebElement parentTag = tag.findElement(By.xpath("./.."));
+
+		final String actual = parentTag.getAttribute("id");
+		final String expected = "login_form";
+
+		assertEquals(expected, actual, "wrong parent");
+	}
+
+	/**
+	 * Tests if the value of the html input field with the id: login_button is correct.
+	 */
+	@Test
+	void testLoginButtonValue() {
+
+		assertEquals("Login", DRIVER.findElement(By.id("login_button")).getAttribute("value"));
+	}
+
+	/**
+	 * Tests if the type of the html input field with the id: login_button is correct.
+	 */
+	@Test
+	void testLoginButtonType() throws Exception {
+
+		assertEquals("submit", DRIVER.findElement(By.id("login_button")).getAttribute("type"));
+
+	}
+
+	/**
+	 * Tests if the required attribute of the html input field with the id: login_button is set.
+	 */
+	@Test
+	void testLoginButtonRequired() throws Exception {
+
+		assertNull(DRIVER.findElement(By.id("login_button")).getAttribute("required"));
+	}
+	
+	/**
+	 * Test of immediate preceding sibling of the tag with id==login-button.
+	 */
+	@Test
+	public void testLoginButtonPrecedingSibling() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_button"));
+
+		final WebElement followingSibling = tag.findElement(By.xpath("preceding-sibling::*[1]"));
+
+		final String expectedId = "login_error_message";
+		final String actualId = followingSibling.getAttribute("id");
+
+		assertEquals(expectedId, actualId, "wrong preceding sibling");
+	}
+	
+	/**
+	 * Test of immediate following sibling of the tag with id==login_button.
+	 * An {@link NoSuchElementException} is expected, since there is no follwoing sibling.
+	 */
+	@Test
+	public void testLoginButtonFollowingSibling() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_button"));
+
+		assertThrows(NoSuchElementException.class, () -> tag.findElement(By.xpath("following-sibling::*[1]")));
+	}
+	
 }
