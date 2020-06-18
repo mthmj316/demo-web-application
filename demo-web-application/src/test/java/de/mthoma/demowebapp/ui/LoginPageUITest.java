@@ -986,4 +986,167 @@ public class LoginPageUITest {
 		assertThrows(NoSuchElementException.class, () -> tag.findElement(By.xpath("following-sibling::*[1]")));
 	}
 	
+	/**
+	 * Test of immediate preceding sibling of the tag with id==login_error_message.
+	 */
+	@Test
+	public void testLoginErrorMessagePrecedingSibling() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_error_message"));
+
+		final WebElement followingSibling = tag.findElement(By.xpath("preceding-sibling::*[1]"));
+
+		final String expectedId = "login_password";
+		final String actualId = followingSibling.getAttribute("id");
+
+		assertEquals(expectedId, actualId, "wrong preceding sibling");
+	}
+
+	/**
+	 * Test of immediate following sibling of the tag with id==login_error_message.
+	 */
+	@Test
+	public void testLoginErrorMessageFollowingSibling() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_error_message"));
+
+		final WebElement followingSibling = tag.findElement(By.xpath("following-sibling::*[1]"));
+
+		final String expectedId = "login_button";
+		final String actualId = followingSibling.getAttribute("id");
+
+		assertEquals(expectedId, actualId, "wrong following sibling");
+	}
+	
+	/**
+	 * Test if the tag with id==login_error_message has the tag name p.
+	 */
+	@Test
+	public void testLogiErrorMessageTagName() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_error_message"));
+
+		final String actual = tag.getTagName();
+
+		assertEquals("p", actual);
+	}
+
+	/**
+	 * Test if the parent of the tag with id==login_error_message is the tag with id==login_form. 
+	 */
+	@Test
+	public void testLogiErrorMessageParent() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_error_message"));
+
+		final WebElement parentTag = tag.findElement(By.xpath("./.."));
+
+		final String actual = parentTag.getAttribute("id");
+		final String expected = "login_form";
+
+		assertEquals(expected, actual);
+	}
+	
+	/**
+	 * Test if the text of the tag with id=login_error_message is correct.
+	 */
+	@Test
+	public void testLoginErrorMessageText() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_error_message"));
+
+		final String actual = tag.getAttribute("innerHTML");
+		final String expected = "Wrong credentials!";
+
+		assertEquals(expected, actual);
+	}
+	
+	/**
+	 * Test of the style of the tag with the id==login_name.
+	 */
+	@Test
+	public void testLoginNameStyle() {
+
+		final Map<String, String> expectedStyle = new HashMap<String, String>();		
+		expectedStyle.put("background-color", "rgb(255, 255, 240)");
+		expectedStyle.put("width", "400px");
+		expectedStyle.put("height", "30px");
+		expectedStyle.put("margin-bottom", "10px");
+		expectedStyle.put("box-sizing", "border-box");
+
+		final WebElement tag = DRIVER.findElement(By.id("login_name"));
+
+		final String testResult = SeleniumCore.checkStyle(DRIVER, tag, expectedStyle);
+
+		assertEquals("", testResult, testResult);
+	}
+	
+	/**
+	 * Test of the style of the tag with the id==login_password.
+	 */
+	@Test
+	public void testLoginPasswordStyle() {
+
+		final Map<String, String> expectedStyle = new HashMap<String, String>();		
+		expectedStyle.put("background-color", "rgb(255, 255, 240)");
+		expectedStyle.put("width", "400px");
+		expectedStyle.put("height", "30px");
+		expectedStyle.put("margin-bottom", "10px");
+		expectedStyle.put("box-sizing", "border-box");
+
+		final WebElement tag = DRIVER.findElement(By.id("login_password"));
+
+		final String testResult = SeleniumCore.checkStyle(DRIVER, tag, expectedStyle);
+
+		assertEquals("", testResult, testResult);
+	}
+	
+	/**
+	 * Test of the style of the tag with the id==login_button.
+	 */
+	@Test
+	public void testLoginButtonStyle() {
+
+		final Map<String, String> expectedStyle = new HashMap<String, String>();
+		expectedStyle.put("background-color", "rgb(119, 136, 153)");
+		expectedStyle.put("width", "400px");
+		expectedStyle.put("height", "30px");
+
+		final WebElement tag = DRIVER.findElement(By.id("login_button"));
+
+		final String testResult = SeleniumCore.checkStyle(DRIVER, tag, expectedStyle);
+
+		assertEquals("", testResult, testResult);
+	}
+	
+	/**
+	 * Test if the class attribute of tag with id==login_error_message is set to class==cls_error_text cls_invisible.
+	 */
+	@Test
+	public void testLoginErrorMessageAttrClass() {
+
+		final WebElement tag = DRIVER.findElement(By.id("login_error_message"));
+
+		final String expected = "cls_error_text cls_invisible";
+		final String actual = tag.getAttribute("class");
+
+		assertEquals(expected, actual, "'" + expected + "'" + " != " + "'" + actual + "'");
+	}
+	
+	/**
+	 * Test of the style of the tag with the id==login_error_message.
+	 */
+	@Test
+	public void testLoginErrorMessageStyle() {
+
+		final Map<String, String> expectedStyle = new HashMap<String, String>();
+		expectedStyle.put("color", "rgb(255, 0, 0)");
+		expectedStyle.put("display", "none");
+
+		final WebElement tag = DRIVER.findElement(By.id("login_error_message"));
+
+		final String testResult = SeleniumCore.checkStyle(DRIVER, tag, expectedStyle);
+
+		assertEquals("", testResult, testResult);
+	}
 }
