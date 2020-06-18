@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html id="html" lang="en" 
+	xmlns:th="http://www.thymeleaf.org">
+	<head id="head">
+		<title id="title">Login Page</title>
+		<link id="link_main_theme" type="text/css" rel="stylesheet" href="css/main_theme.css" />
+	</head>
+	<body id="body">
+		<div id="main_container" class="cls_main_container">
+			<div id="main_container_horizontal" class="cls_main_container_horizontal">
+				<div id="main_container_vertical" class="cls_main_container_vertical">
+					<h2 id="welcome_address_header" class="cls_main_header" th:text="'Welcome ' + ${var_user_name} + ' to your home page!'"></h2>
+					<form id="logout_form" action="perform_logout" method="post">
+						<input id="logout_button" type="submit" class="cls_login_button" value="Logout" />
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

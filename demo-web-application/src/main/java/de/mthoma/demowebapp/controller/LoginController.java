@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LoginController {
 
-
 	/**
 	 * 
 	 * @param model
@@ -29,17 +28,4 @@ public class LoginController {
         
         return "login_page";
 	}
-	
-//	/**
-//	 * 
-//	 * @param model
-//	 * @return
-//	 */
-//	@PostMapping(value = "/login?error=true")
-//	public String loginOnError(Model model) {
-//		
-//		model.addAttribute("login_error_message_cls", "cls_visible");
-//        
-//        return "login_page";
-//	}
 }
