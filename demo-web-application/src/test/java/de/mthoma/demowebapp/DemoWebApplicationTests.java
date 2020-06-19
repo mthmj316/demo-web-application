@@ -24,6 +24,8 @@ public class DemoWebApplicationTests {
 	
 	@Autowired
 	HomeController homeController;
+
+	public static final String BOLD = "700";
 	
 	@Test
 	void contextLoads() {

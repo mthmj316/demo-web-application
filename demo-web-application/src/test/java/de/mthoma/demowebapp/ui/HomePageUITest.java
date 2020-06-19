@@ -536,4 +536,206 @@ public class HomePageUITest {
 
 		assertEquals("", testResult, testResult);
 	}
+	
+	/**
+	 * Test of the style of the tag with the id==main_container_vertical.
+	 */
+	@Test
+	public void testMainContainerVerticalStyle() {
+
+		final Map<String, String> expectedStyle = new HashMap<String, String>();
+		expectedStyle.put("background-color","rgb(224, 255, 255)");
+		expectedStyle.put("width", "400px");
+		expectedStyle.put("border-top-width","1px");
+		expectedStyle.put("border-bottom-width","1px");
+		expectedStyle.put("border-left-width","1px");
+		expectedStyle.put("border-right-width","1px");
+		expectedStyle.put("border-top-style","solid");
+		expectedStyle.put("border-bottom-style","solid");
+		expectedStyle.put("border-left-style","solid");
+		expectedStyle.put("border-right-style","solid");
+		expectedStyle.put("border-top-color","rgb(61, 109, 169)");
+		expectedStyle.put("border-bottom-color","rgb(61, 109, 169)");
+		expectedStyle.put("border-left-color","rgb(61, 109, 169)");
+		expectedStyle.put("border-right-color","rgb(61, 109, 169)");
+		expectedStyle.put("height","250px");
+		expectedStyle.put("padding-top","20px");
+		expectedStyle.put("padding-bottom","20px");
+		expectedStyle.put("padding-left","20px");
+		expectedStyle.put("padding-right","20px");
+
+		final WebElement tag = DRIVER.findElement(By.id("main_container_vertical"));
+
+		final String testResult = SeleniumCore.checkStyle(DRIVER, tag, expectedStyle);
+
+		assertEquals("", testResult, testResult);
+	}
+	
+	/**
+	 * Test if the tag with id==main_container_vertical has the tag name div.
+	 */
+	@Test
+	public void testMainContainerVerticalTagName() {
+
+		final WebElement tag = DRIVER.findElement(By.id("main_container_vertical"));
+
+		final String actual = tag.getTagName();
+
+		assertEquals("div", actual);
+	}
+
+	/**
+	 * Test if the parent of the tag with id==main_container_vertical is the tag with id==main_container_horizontal. 
+	 */
+	@Test
+	public void testMainContainerVerticalParent() {
+
+		final WebElement tag = DRIVER.findElement(By.id("main_container_vertical"));
+
+		final WebElement parentTag = tag.findElement(By.xpath("./.."));
+
+		final String actual = parentTag.getAttribute("id");
+		final String expected = "main_container_horizontal";
+
+		assertEquals(expected, actual);
+	}
+	
+	/**
+	 * Test of immediate following sibling of the tag with id==main_container_vertical.
+	 * An {@link NoSuchElementException} is expected, since there is no following sibling.
+	 */
+	@Test
+	public void testMainContainerVerticalFollowingSibling() {
+
+		final WebElement tag = DRIVER.findElement(By.id("main_container_vertical"));
+
+		assertThrows(NoSuchElementException.class, () -> tag.findElement(By.xpath("following-sibling::*[1]")));
+	}
+
+	/**
+	 * Test of immediate preceding sibling of the tag with id==main_container_vertical.
+	 * An {@link NoSuchElementException} is expected, since there is no preceding sibling.
+	 */
+	@Test
+	public void testMainContainerVerticalPrecedingSibling() {
+
+		final WebElement tag = DRIVER.findElement(By.id("main_container_vertical"));
+
+		assertThrows(NoSuchElementException.class, () -> tag.findElement(By.xpath("preceding-sibling::*[1]")));
+	}
+	
+	/**
+	 * Test if the class attribute of tag with id==main_container_vertical is set to class==cls_main_container_vertical.
+	 */
+	@Test
+	public void testMainContainerVerticalAttrClass() {
+
+		final WebElement tag = DRIVER.findElement(By.id("main_container_vertical"));
+
+		final String expected = "cls_main_container_vertical";
+		final String actual = tag.getAttribute("class");
+
+		assertEquals(expected, actual, "wrong class");
+	}
+	
+	/**
+	 * Test if the header with id==welcome_address_header has the tag name h2.
+	 */
+	@Test
+	public void testWelcomeAddressHeaderTagName() {
+
+		final WebElement tag = DRIVER.findElement(By.id("welcome_address_header"));
+
+		final String actual = tag.getTagName();
+
+		assertEquals("h2", actual);
+	}
+
+	/**
+	 * Test if the parent of the header with id==welcome_address_header is the tag with id==main_container_vertical. 
+	 */
+	@Test
+	public void testWelcomeAddressHeaderParent() {
+
+		final WebElement tag = DRIVER.findElement(By.id("welcome_address_header"));
+
+		final WebElement parentTag = tag.findElement(By.xpath("./.."));
+
+		final String actual = parentTag.getAttribute("id");
+		final String expected = "main_container_vertical";
+
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test if the text of the header with id==welcome_address_header text is correct. 
+	 */
+	@Test
+	public void testWelcomeAddressHeaderText() {
+
+		final WebElement tag = DRIVER.findElement(By.id("welcome_address_header"));
+
+		final String actual = tag.getText();
+		final String expected = "Welcome " + user.getAlias() + " to your home page!";
+
+		assertEquals(expected, actual);
+	}
+	
+	/**
+	 * Test of immediate preceding sibling of the tag with id==welcome_address_header.
+	 * An {@link NoSuchElementException} is expected, since there is no preceding sibling.
+	 */
+	@Test
+	public void testWelcomeAddressHeaderPrecedingSibling() {
+
+		final WebElement tag = DRIVER.findElement(By.id("welcome_address_header"));
+
+		assertThrows(NoSuchElementException.class, () -> tag.findElement(By.xpath("preceding-sibling::*[1]")));
+	}
+	
+	/**
+	 * Test of immediate following sibling of the tag with id==welcome_address_header.
+	 */
+	@Test
+	public void testWelcomeAddressHeaderFollowingSibling() {
+
+		final WebElement tag = DRIVER.findElement(By.id("welcome_address_header"));
+
+		final WebElement followingSibling = tag.findElement(By.xpath("following-sibling::*[1]"));
+
+		final String expectedId = "logout_form";
+		final String actualId = followingSibling.getAttribute("id");
+
+		assertEquals(expectedId, actualId, "wrong following sibling");
+	}
+	
+	/**
+	 * Test if the class attribute of tag with id==welcome_address_header is set to class==cls_main_header.
+	 */
+	@Test
+	public void testWelcomeAddressHeaderAttrClass() {
+
+		final WebElement tag = DRIVER.findElement(By.id("welcome_address_header"));
+
+		final String expected = "cls_main_header";
+		final String actual = tag.getAttribute("class");
+
+		assertEquals(expected, actual, "wrong class");
+	}
+	
+	/**
+	 * Test of the style of the tag with the id==welcome_address_header.
+	 */
+	@Test
+	public void testWelcomeAddressHeaderStyle() {
+
+		final Map<String, String> expectedStyle = new HashMap<String, String>();
+		expectedStyle.put("font-weight", DemoWebApplicationTests.BOLD); //BOLD == 700
+
+		final WebElement tag = DRIVER.findElement(By.id("welcome_address_header"));
+
+		final String testResult = SeleniumCore.checkStyle(DRIVER, tag, expectedStyle);
+
+		assertEquals("", testResult, testResult);
+	}
 }

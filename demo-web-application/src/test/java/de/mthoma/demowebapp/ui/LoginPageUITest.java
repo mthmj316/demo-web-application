@@ -25,7 +25,6 @@ import de.mthoma.demowebapp.utils.SeleniumCore;
 @SpringBootTest
 public class LoginPageUITest {
 	
-	private static final String BOLD = "700";
 	private static WebDriver DRIVER = SeleniumCore.getDriver(); 
 	
 	@BeforeAll
@@ -559,7 +558,7 @@ public class LoginPageUITest {
 	public void testLoginHeaderStyle() {
 
 		final Map<String, String> expectedStyle = new HashMap<String, String>();
-		expectedStyle.put("font-weight", BOLD); //BOLD == 700
+		expectedStyle.put("font-weight", DemoWebApplicationTests.BOLD); //BOLD == 700
 
 		final WebElement tag = DRIVER.findElement(By.id("login_header"));
 
