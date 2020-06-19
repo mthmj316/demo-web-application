@@ -708,7 +708,6 @@ public class HomePageUITest {
 
 		assertEquals(expectedId, actualId, "wrong following sibling");
 
-		//Test
 	}
 	
 	/**
