@@ -3,6 +3,7 @@ package de.mthoma.demowebapp.ui;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -96,17 +97,6 @@ public class HomePageUITest {
 		final WebElement tag = DRIVER.findElement(By.id("html"));
 
 		assertThrows(NoSuchElementException.class, () -> tag.findElement(By.xpath("preceding-sibling::*[1]")));
-	}
-
-	/**
-	 * Test if there is a superior tag to the html tag. 
-	 */
-	@Test
-	public void testHTMLParent() {
-
-		final WebElement tag = DRIVER.findElement(By.id("html"));
-
-		assertThrows(NoSuchElementException.class, () -> tag.findElement(By.xpath("./..")));
 	}
 	
 	/**
@@ -261,7 +251,7 @@ public class HomePageUITest {
 
 		final String actualParentId = parentTag.getAttribute("id");
 
-		assertEquals("parent_id", actualParentId);
+		assertEquals("head", actualParentId);
 	}
 
 	/**
@@ -286,7 +276,7 @@ public class HomePageUITest {
 
 		final WebElement tag = DRIVER.findElement(By.id("link_main_theme"));
 
-		final String expected = " /css/main_theme.css";
+		final String expected = "http://localhost:8080/css/main_theme.css";
 		final String actual = tag.getAttribute("href");
 
 		assertEquals(expected, actual);
@@ -691,6 +681,7 @@ public class HomePageUITest {
 		final WebElement tag = DRIVER.findElement(By.id("welcome_address_header"));
 
 		assertThrows(NoSuchElementException.class, () -> tag.findElement(By.xpath("preceding-sibling::*[1]")));
+		
 	}
 	
 	/**
@@ -737,5 +728,180 @@ public class HomePageUITest {
 		final String testResult = SeleniumCore.checkStyle(DRIVER, tag, expectedStyle);
 
 		assertEquals("", testResult, testResult);
+	}
+	
+	/**
+	 * Test if the tag with id==logout_form has the tag name form.
+	 */
+	@Test
+	public void testLogoutFormTagName() {
+
+		final WebElement tag = DRIVER.findElement(By.id("logout_form"));
+
+		final String actual = tag.getTagName();
+
+		assertEquals("form", actual);
+	}
+
+	/**
+	 * Test if the parent of the tag with id==logout_form is the tag with id==main_container_vertical. 
+	 */
+	@Test
+	public void testLogoutFormParent() {
+
+		final WebElement tag = DRIVER.findElement(By.id("logout_form"));
+
+		final WebElement parentTag = tag.findElement(By.xpath("./.."));
+
+		final String actual = parentTag.getAttribute("id");
+		final String expected = "main_container_vertical";
+
+		assertEquals(expected, actual);
+	}
+
+	/**
+	 * Test the submission method of the form with the id: logout_form
+	 */
+	@Test
+	void testLogoutFormMethod() {
+
+		final WebElement tag = DRIVER.findElement(By.id("logout_form"));
+
+		final String expectedMethod = "post";
+		final String actualMethod = tag.getAttribute("method");
+
+		assertEquals(expectedMethod, actualMethod, "wrong submission method");
+	}
+
+	/**
+	 * Test the action of the form with the id: logout_form
+	 */
+	@Test
+	void testLogoutFormAction() {
+
+		final WebElement tag = DRIVER.findElement(By.id("logout_form"));
+
+		final String expectedAction = "http://localhost:8080/perform_logout";
+		final String actualAction = tag.getAttribute("action");
+
+		assertEquals(expectedAction, actualAction, "wrong action");
+	}
+	
+	/**
+	 * Test of immediate preceding sibling of the tag with id==login_form.
+	 */
+	@Test
+	public void testLoginFormPrecedingSibling() {
+
+		final WebElement tag = DRIVER.findElement(By.id("logout_form"));
+
+		final WebElement followingSibling = tag.findElement(By.xpath("preceding-sibling::*[1]"));
+
+		final String expectedId = "welcome_address_header";
+		final String actualId = followingSibling.getAttribute("id");
+
+		assertEquals(expectedId, actualId, "wrong preceding sibling");
+	}
+	
+	/**
+	 * Test of immediate following sibling of the tag with id==login_form.
+	 * An {@link NoSuchElementException} is expected, since there is no following sibling.
+	 */
+	@Test
+	public void testLoginFormFollowingSibling() {
+
+		final WebElement tag = DRIVER.findElement(By.id("logout_form"));
+
+		assertThrows(NoSuchElementException.class, () -> tag.findElement(By.xpath("following-sibling::*[1]")));
+	}
+	
+	/**
+	 * Test of the style of the tag with the id==logout_button.
+	 */
+	@Test
+	public void testLogoutButtonStyle() {
+
+		final Map<String, String> expectedStyle = new HashMap<String, String>();
+		expectedStyle.put("background-color", "rgb(119, 136, 153)");
+		expectedStyle.put("width", "400px");
+		expectedStyle.put("height", "30px");
+
+		final WebElement tag = DRIVER.findElement(By.id("logout_button"));
+
+		final String testResult = SeleniumCore.checkStyle(DRIVER, tag, expectedStyle);
+
+		assertEquals("", testResult, testResult);
+	}
+	
+	/**
+	 * Test of immediate following sibling of the tag with id==logout_button.
+	 * An {@link NoSuchElementException} is expected, since there is no following sibling.
+	 */
+	@Test
+	public void testLogoutButtonFollowingSibling() {
+
+		final WebElement tag = DRIVER.findElement(By.id("logout_button"));
+
+		assertThrows(NoSuchElementException.class, () -> tag.findElement(By.xpath("following-sibling::*[1]")));
+	}
+
+	/**
+	 * Test of immediate preceding sibling of the tag with id==logout_button.
+	 * An {@link NoSuchElementException} is expected, since there is no preceding sibling.
+	 */
+	@Test
+	public void testLogoutButtonPrecedingSibling() {
+
+		final WebElement tag = DRIVER.findElement(By.id("logout_button"));
+
+		assertThrows(NoSuchElementException.class, () -> tag.findElement(By.xpath("preceding-sibling::*[1]")));
+	}
+	
+	/**
+	 * Test if the tag with id==logout_button has the tag name input.
+	 */
+	@Test
+	public void testLogoutButtonTagName() {
+
+		final WebElement tag = DRIVER.findElement(By.id("logout_button"));
+
+		final String actual = tag.getTagName();
+
+		assertEquals("input", actual, "wrong tag name");
+	}
+
+	/**
+	 * Test if the parent of the tag with id==logout_button is the tag with id==logout_form. 
+	 */
+	@Test
+	public void testLogoutButtonParent() {
+
+		final WebElement tag = DRIVER.findElement(By.id("logout_button"));
+
+		final WebElement parentTag = tag.findElement(By.xpath("./.."));
+
+		final String actual = parentTag.getAttribute("id");
+		final String expected = "logout_form";
+
+		assertEquals(expected, actual, "wrong parent");
+	}
+
+	/**
+	 * Tests if the value of the html input field with the id: logout_button is correct.
+	 */
+	@Test
+	public void testLogoutButtonValue() {
+
+		assertEquals("Logout", DRIVER.findElement(By.id("logout_button")).getAttribute("value"));
+	}
+
+	/**
+	 * Tests if the type of the html input field with the id: logout_button is correct.
+	 */
+	@Test
+	public void testLogoutButtonType() throws Exception {
+
+		assertEquals("submit", DRIVER.findElement(By.id("logout_button")).getAttribute("type"));
+
 	}
 }
