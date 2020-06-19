@@ -707,7 +707,6 @@ public class HomePageUITest {
 		final String actualId = followingSibling.getAttribute("id");
 
 		assertEquals(expectedId, actualId, "wrong following sibling");
-
 	}
 	
 	/**
