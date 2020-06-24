@@ -7,12 +7,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -335,26 +340,41 @@ public class LoginPageUITest {
 		assertEquals(expected, actual, "'" + expected + "'" + " != " + "'" + actual + "'");
 	}
 	
-	/**
-	 * Test of the style of the tag with the id==main_container.
-	 */
-	@Test
-	public void testMainContainerStyle() {
-		
-		final Map<String, String> expectedStyle = new HashMap<String, String>();
-		expectedStyle.put("display", "table");
-		expectedStyle.put("position", "absolute");
-		expectedStyle.put("top", "0px");
-		expectedStyle.put("left", "0px");		
-		expectedStyle.put("height", SeleniumCore.getWindowHeight(DRIVER) + "px"); //Test 100% height
-		expectedStyle.put("width", SeleniumCore.getWindowWidth(DRIVER) + "px"); // Test 100% width
+	@ParameterizedTest
+	@CsvSource({"display,table", "position,absolute", "top,0px", "left,0px"})
+	@MethodSource("provideMainContainerDimensionSource")
+	public void testMainContainerStyle(String cvsPorperty, String expectedCvsValue) {
 		
 		WebElement tag = DRIVER.findElement(By.id("main_container"));
 		
-		String testResult = SeleniumCore.checkStyle(DRIVER, tag, expectedStyle);
-		
-		assertEquals("", testResult, testResult);
+		assertEquals(expectedCvsValue, tag.getCssValue(cvsPorperty));
 	}
+	
+	private static Stream<Arguments> provideMainContainerDimensionSource() {
+		return Stream.of(Arguments.of("height", SeleniumCore.getWindowHeight(DRIVER) + "px"),
+				Arguments.of("width", SeleniumCore.getWindowWidth(DRIVER) + "px"));
+	}
+	
+//	/**
+//	 * Test of the style of the tag with the id==main_container.
+//	 */
+//	@Test
+//	public void testMainContainerStyle() {
+//		
+//		final Map<String, String> expectedStyle = new HashMap<String, String>();
+////		expectedStyle.put("display", "table");
+////		expectedStyle.put("position", "absolute");
+////		expectedStyle.put("top", "0px");
+////		expectedStyle.put("left", "0px");		
+////		expectedStyle.put("height", SeleniumCore.getWindowHeight(DRIVER) + "px"); //Test 100% height
+////		expectedStyle.put("width", SeleniumCore.getWindowWidth(DRIVER) + "px"); // Test 100% width
+//		
+//		WebElement tag = DRIVER.findElement(By.id("main_container"));
+//		
+//		String testResult = SeleniumCore.checkStyle(DRIVER, tag, expectedStyle);
+//		
+//		assertEquals("", testResult, testResult);
+//	}
 	
 	/**
 	 * Test if the tag with id==main_container_horizontal has the tag name div.
