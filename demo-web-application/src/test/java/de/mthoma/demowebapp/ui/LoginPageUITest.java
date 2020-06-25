@@ -355,27 +355,6 @@ public class LoginPageUITest {
 				Arguments.of("width", SeleniumCore.getWindowWidth(DRIVER) + "px"));
 	}
 	
-//	/**
-//	 * Test of the style of the tag with the id==main_container.
-//	 */
-//	@Test
-//	public void testMainContainerStyle() {
-//		
-//		final Map<String, String> expectedStyle = new HashMap<String, String>();
-////		expectedStyle.put("display", "table");
-////		expectedStyle.put("position", "absolute");
-////		expectedStyle.put("top", "0px");
-////		expectedStyle.put("left", "0px");		
-////		expectedStyle.put("height", SeleniumCore.getWindowHeight(DRIVER) + "px"); //Test 100% height
-////		expectedStyle.put("width", SeleniumCore.getWindowWidth(DRIVER) + "px"); // Test 100% width
-//		
-//		WebElement tag = DRIVER.findElement(By.id("main_container"));
-//		
-//		String testResult = SeleniumCore.checkStyle(DRIVER, tag, expectedStyle);
-//		
-//		assertEquals("", testResult, testResult);
-//	}
-	
 	/**
 	 * Test if the tag with id==main_container_horizontal has the tag name div.
 	 */
