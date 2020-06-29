@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assumptions.assumingThat;
+import static org.mockito.Mockito.when;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +20,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.Mockito;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -650,33 +653,19 @@ public class LoginPageUITest {
 
 		assertEquals(expectedAction, actualAction, "wrong action");
 	}
-	
-	/**
-	 * Test of immediate preceding sibling of the tag with id==login_form.
-	 */
-	@Test
-	public void testLoginFormPrecedingSibling() {
+		
+	@ParameterizedTest
+	@CsvSource({",following-sibling::*[1]", "login_header,preceding-sibling::*[1]"})
+	public void testLoginFormSibling(final String expectedSiblingId, final String xpath) {
 
 		final WebElement tag = DRIVER.findElement(By.id("login_form"));
-
-		final WebElement followingSibling = tag.findElement(By.xpath("preceding-sibling::*[1]"));
-
-		final String expectedId = "login_header";
-		final String actualId = followingSibling.getAttribute("id");
-
-		assertEquals(expectedId, actualId, "wrong preceding sibling");
-	}
-	
-	/**
-	 * Test of immediate following sibling of the tag with id==login_form.
-	 * An {@link NoSuchElementException} is expected, since there is no follwoing sibling.
-	 */
-	@Test
-	public void testLoginFormFollowingSibling() {
-
-		final WebElement tag = DRIVER.findElement(By.id("login_form"));
-
-		assertThrows(NoSuchElementException.class, () -> tag.findElement(By.xpath("following-sibling::*[1]")));
+		
+		if(expectedSiblingId == null) {
+			assertThrows(NoSuchElementException.class, () -> tag.findElement(By.xpath(xpath)));		
+		} else {
+			final WebElement sibling = tag.findElement(By.xpath(xpath));
+			assertEquals(expectedSiblingId, sibling.getAttribute("id"), "wrong sibling");
+		}
 	}
 	
 	/**
@@ -839,36 +828,35 @@ public class LoginPageUITest {
 		assertNotNull(DRIVER.findElement(By.id("login_password")).getAttribute("required"));
 	}
 	
-	/**
-	 * Test of immediate preceding sibling of the tag with id==login_password.
-	 */
-	@Test
-	public void testLoginPasswordPrecedingSibling() {
+//	/**
+	
+//	/**
+//	 * Test of immediate following sibling of the tag with id==login_password.
+//	 */
+//	@ParameterizedTest
+//	@CsvSource({"login_error_message,following-sibling::*[1]", "login_name,preceding-sibling::*[1]"})
+//	public void testLoginPasswordSibling(final String expectedSiblingId, final String xpath) {
+//
+//		final WebElement tag = DRIVER.findElement(By.id("login_password"));
+//
+//		final WebElement sibling = tag.findElement(By.xpath(xpath));
+//
+//		assertEquals(expectedSiblingId, sibling.getAttribute("id"), "wrong sibling");
+//	}
+	
+	@ParameterizedTest
+	@CsvSource({"login_error_message,following-sibling::*[1]", "login_name,preceding-sibling::*[1]"})
+	public void testLoginPasswordSibling(final String expectedSiblingId, final String xpath) {
 
 		final WebElement tag = DRIVER.findElement(By.id("login_password"));
-
-		final WebElement followingSibling = tag.findElement(By.xpath("preceding-sibling::*[1]"));
-
-		final String expectedId = "login_name";
-		final String actualId = followingSibling.getAttribute("id");
-
-		assertEquals(expectedId, actualId, "wrong preceding sibling");
-	}
-
-	/**
-	 * Test of immediate following sibling of the tag with id==login_password.
-	 */
-	@Test
-	public void testLoginPasswordFollowingSibling() {
-
-		final WebElement tag = DRIVER.findElement(By.id("login_password"));
-
-		final WebElement followingSibling = tag.findElement(By.xpath("following-sibling::*[1]"));
-
-		final String expectedId = "login_error_message";
-		final String actualId = followingSibling.getAttribute("id");
-
-		assertEquals(expectedId, actualId, "wrong following sibling");
+		
+		if(expectedSiblingId == null) {
+			assertThrows(NoSuchElementException.class, () -> tag.findElement(By.xpath(xpath)));		
+		} else {
+			final WebElement sibling = tag.findElement(By.xpath(xpath));
+			assertEquals(expectedSiblingId, 
+					sibling.getAttribute("id"), "wrong sibling");
+		}
 	}
 	
 	/**
